@@ -16,6 +16,8 @@ class ListAdapter() : RecyclerView.Adapter<ListAdapter.ListResultViewHolder>() {
 
     var listData: List<PokemonEntry> by Delegates.observable(listOf()) { _, _, _ -> notifyDataSetChanged() }
 
+    lateinit var clickListener: (item: PokemonEntry) -> Unit
+
     override fun getItemCount(): Int {
         return listData.size
     }
@@ -25,7 +27,7 @@ class ListAdapter() : RecyclerView.Adapter<ListAdapter.ListResultViewHolder>() {
         item.pokemonSpecies?.name?.let { holder.tvPokemonName.text = it }
         item.entryNumber?.let { holder.tvNumber.text = it.toString() }
         holder.layoutPokemon.setOnClickListener {
-
+            clickListener.invoke(item)
         }
     }
 
