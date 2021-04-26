@@ -1,7 +1,8 @@
-package com.finnomena.project.candidate
+package com.finnomena.project.candidate.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.finnomena.project.candidate.R
 
 class MainActivity : AppCompatActivity() {
 
