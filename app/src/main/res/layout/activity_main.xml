@@ -2,29 +2,76 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/tv_search"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:hint="Input pokemon name here"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_search"
+            android:text="@string/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_16"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle"
+            android:layout_margin="@dimen/margin_8"
+            android:background="@drawable/circle_aqua"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_search"
-        android:text="SEARCH"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tv_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Fill pokemon name or ID"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:padding="@dimen/margin_8"
+            android:layout_margin="@dimen/margin_8"
+            android:background="@drawable/circle_primary_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_red"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/circle_red"
+            android:layout_margin="@dimen/margin_4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_search"
+            app:layout_constraintEnd_toStartOf="@id/iv_yellow"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_yellow"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/circle_yellow"
+            android:layout_margin="@dimen/margin_4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_search"
+            app:layout_constraintEnd_toStartOf="@id/iv_green"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_green"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/circle_green"
+            android:layout_margin="@dimen/margin_4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_search"
+            app:layout_constraintEnd_toStartOf="@id/btn_search"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

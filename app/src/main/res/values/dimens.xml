@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="margin_2">2dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+
+    <dimen name="text_small">16sp</dimen>
+    <dimen name="text_middle">20sp</dimen>
+    <dimen name="text_larg">24sp</dimen>
+</resources>
