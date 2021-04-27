@@ -37,12 +37,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/ivPokemonName"
+        android:id="@+id/tvPokemonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_16"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_larg"
+        android:textSize="@dimen/text_xx_larg"
         tools:text="Name"
         app:layout_constraintTop_toTopOf="@id/ivBack"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,15 +54,208 @@
         android:id="@+id/ivPokemonImg"
         android:layout_width="256dp"
         android:layout_height="256dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="@dimen/margin_8"
         android:background="@drawable/rec_accent_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivPokemonName"
-        app:srcCompat="@drawable/pokemon_test_img" />
+        app:layout_constraintTop_toBottomOf="@id/tvPokemonName"
+        tools:srcCompat="@drawable/pokemon_test_img" />
 
 
-<!--    - height-->
-<!--    - weight-->
-<!--    - types-->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/ivPokemonImg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/margin_8"
+            android:layout_margin="@dimen/margin_8">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPokemonHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    tools:text="height : "
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPokemonWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    tools:text="weight : "
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPokemonTypes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_larg"
+                tools:text="types : "
+                app:layout_constraintTop_toBottomOf="@id/layoutBody"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPokemonState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_larg"
+                android:text="Base status"
+                app:layout_constraintTop_toBottomOf="@id/tvPokemonTypes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutStateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                app:layout_constraintTop_toBottomOf="@id/tvPokemonState"
+                app:layout_constraintStart_toStartOf="parent">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    android:text="HP : "
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    android:text="ATK : "
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    android:text="S.ATK : "
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    android:text="DEF : "
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    android:text="S.DEF : "
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    android:text="SPD : "
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutState"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                app:layout_constraintTop_toBottomOf="@id/tvPokemonState"
+                app:layout_constraintStart_toEndOf="@id/layoutStateText"
+                app:layout_constraintEnd_toEndOf="parent">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvhp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvattack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvspecial_attack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvdefense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvspecial_defense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvspeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_larg"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

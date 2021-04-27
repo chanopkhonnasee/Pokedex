@@ -1,5 +1,6 @@
 package com.finnomena.project.candidate.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -39,10 +40,24 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initViewModel() {
         viewModel.pokemon.observe(this, Observer { pokemon ->
-            ivPokemonName.text = pokemon.name
+            tvPokemonName.text = pokemon.name
             loadImage(pokemon.sprites?.frontDefault,ivPokemonImg)
+            tvPokemonHeight.text = "Height : "+pokemon.height.toString()
+            tvPokemonWeight.text = "Weight : "+pokemon.weight.toString()
+            tvPokemonTypes.text = "Types : "+pokemon.types?.map { it.type?.name }.toString().replace("[","").replace("]","")
+            pokemon.stats?.forEach {
+                when(it.stat?.name) {
+                    "hp" -> { tvhp.text = it.baseStat.toString() }
+                    "attack" -> { tvattack.text = it.baseStat.toString() }
+                    "special-attack" -> { tvspecial_attack.text = it.baseStat.toString() }
+                    "defense" -> { tvdefense.text = it.baseStat.toString() }
+                    "special-defense" -> { tvspecial_defense.text = it.baseStat.toString() }
+                    "speed" -> { tvspeed.text = it.baseStat.toString() }
+                }
+            }
         })
     }
 

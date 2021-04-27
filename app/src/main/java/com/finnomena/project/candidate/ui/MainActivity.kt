@@ -37,10 +37,20 @@ class MainActivity : AppCompatActivity() {
             intent.putExtras(bundle)
             startActivity(intent)
         }
+        btn_search.setOnClickListener {
+            val textSearch = tv_search.text.toString()
+            val number = viewModel.pokemonKanto.value?.pokemonEntries?.find { it.pokemonSpecies?.name == textSearch || it.entryNumber.toString() == textSearch }?.entryNumber?.toInt()
+            if(number!=null){
+                pokemonAdapter?.focusPosition(number-1)
+                listRecycler.scrollToPosition(number-1)
+            } else {
+                //TODO not found
+            }
+        }
     }
 
     private fun initViewData() {
-        pokemonAdapter = ListAdapter()
+        pokemonAdapter = ListAdapter(this)
         listRecycler.adapter = pokemonAdapter
 
         viewModel.getPokemonKanto()
