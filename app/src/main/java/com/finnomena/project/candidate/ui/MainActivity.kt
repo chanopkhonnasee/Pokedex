@@ -3,6 +3,7 @@ package com.finnomena.project.candidate.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.finnomena.project.candidate.R
 import com.google.gson.Gson
@@ -20,11 +21,17 @@ class MainActivity : AppCompatActivity() {
         initViewData()
         initEvent()
         initViewModel()
+
+        //TODO splash screen
+        //TODO loading
     }
 
     private fun initViewModel() {
         viewModel.pokemonKanto.observe(this, Observer { kanto ->
             kanto.pokemonEntries?.let { pokemonEntry -> pokemonAdapter?.listData = pokemonEntry }
+        })
+        viewModel.pokemon.observe(this, Observer { pokemon ->
+            pokemonAdapter?.listData?.find { it.entryNumber == pokemon.id }?.frontDefault = pokemon.sprites?.frontDefault
         })
     }
 
@@ -44,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 pokemonAdapter?.focusPosition(number-1)
                 listRecycler.scrollToPosition(number-1)
             } else {
-                //TODO not found
+                Toast.makeText(this,"Pokemon not found",Toast.LENGTH_SHORT)
             }
         }
     }
@@ -54,5 +61,11 @@ class MainActivity : AppCompatActivity() {
         listRecycler.adapter = pokemonAdapter
 
         viewModel.getPokemonKanto()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        pokemonAdapter?.notifyDataSetChanged()
     }
 }

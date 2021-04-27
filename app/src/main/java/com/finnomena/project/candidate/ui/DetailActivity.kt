@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.finnomena.project.candidate.R
 import com.finnomena.project.candidate.repositiry.model.PokemonEntry
+import com.gisc.track.util.SharedPrefsUtil
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,7 +30,6 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        initViewModel()
         initViewData()
         initEvent()
     }
@@ -41,10 +41,10 @@ class DetailActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initViewModel() {
+    private fun initViewModel(entryNumber: Int) {
         viewModel.pokemon.observe(this, Observer { pokemon ->
             tvPokemonName.text = pokemon.name
-            loadImage(pokemon.sprites?.frontDefault,ivPokemonImg)
+            loadImage(pokemon.sprites?.frontDefault,ivPokemonImg,pokemon.name!!)
             tvPokemonHeight.text = "Height : "+pokemon.height.toString()
             tvPokemonWeight.text = "Weight : "+pokemon.weight.toString()
             tvPokemonTypes.text = "Types : "+pokemon.types?.map { it.type?.name }.toString().replace("[","").replace("]","")
@@ -66,17 +66,21 @@ class DetailActivity : AppCompatActivity() {
         bundle?.let{
             val json = bundle.getString("pokemonEntry")
             val data = Gson().fromJson(json, PokemonEntry::class.java)
-            //TODO check null
-            viewModel.getPokemon(data.entryNumber.toString())
+            if(data.entryNumber != null) {
+                initViewModel(data.entryNumber!!)
+                viewModel.getPokemon(data.entryNumber.toString())
+            } else {
+                onBackPressed()
+            }
         }
     }
 
-    private fun loadImage(url: String?,view: ImageView) {
+    private fun loadImage(url: String?,view: ImageView, name: String) {
         if (url != null && url.isNotBlank()) {
-
             Glide.with(this)
                 .load(url)
                 .into(view)
+            SharedPrefsUtil.setString(this,name,url)
         }
     }
 }

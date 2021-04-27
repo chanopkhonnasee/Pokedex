@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlin.properties.Delegates
 
 import android.content.Context
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
 import com.finnomena.project.candidate.R
 import com.finnomena.project.candidate.repositiry.model.PokemonEntry
+import com.gisc.track.util.SharedPrefsUtil
 
 class ListAdapter(val context: Context) : RecyclerView.Adapter<ListAdapter.ListResultViewHolder>() {
 
@@ -27,8 +30,20 @@ class ListAdapter(val context: Context) : RecyclerView.Adapter<ListAdapter.ListR
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ListResultViewHolder, position: Int) {
         val item = listData[position]
-        item.pokemonSpecies?.name?.let { holder.tvPokemonName.text = it }
+        item.pokemonSpecies?.name?.let {
+            holder.tvPokemonName.text = it
+            SharedPrefsUtil.getString(context,it)?.let { item.frontDefault = it }
+        }
         item.entryNumber?.let { holder.tvNumber.text = "#$it" }
+        if(item.frontDefault != null){
+            Glide.with(context)
+                .load(item.frontDefault)
+                .into(holder.tvPokemonImage)
+        } else {
+            Glide.with(context)
+                .load("")
+                .into(holder.tvPokemonImage)
+        }
         holder.layoutPokemon.setOnClickListener {
             clickListener.invoke(item)
         }
@@ -53,6 +68,7 @@ class ListAdapter(val context: Context) : RecyclerView.Adapter<ListAdapter.ListR
         internal val tvPokemonName: TextView = itemView.findViewById(R.id.tvPokemonName)
         internal val tvNumber: TextView = itemView.findViewById(R.id.tvNumber)
         internal val layoutPokemon: ConstraintLayout = itemView.findViewById(R.id.layoutPokemon)
+        internal val tvPokemonImage: ImageView = itemView.findViewById(R.id.tvPokemonImage)
     }
 
     fun focusPosition(position: Int){

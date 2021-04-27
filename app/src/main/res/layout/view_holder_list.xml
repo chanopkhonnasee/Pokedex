@@ -21,13 +21,24 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvPokemonName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="bulbasaur"
         android:layout_margin="@dimen/margin_16"
         android:textSize="@dimen/text_xxx_larg"
         android:textColor="@color/colorDarkGray"
         app:layout_constraintStart_toEndOf="@id/tvNumber"
+        app:layout_constraintEnd_toStartOf="@id/tvPokemonImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/tvPokemonImage"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_8"
+        tools:src="@drawable/pokemon_test_img"
+        android:foregroundGravity="right"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <androidx.appcompat.widget.AppCompatImageView
