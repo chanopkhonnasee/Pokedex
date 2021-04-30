@@ -3,11 +3,15 @@ package com.finnomena.project.candidate.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.finnomena.project.candidate.R
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.frlProgressBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -18,20 +22,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        showLoading()
         initViewData()
         initEvent()
         initViewModel()
 
-        //TODO splash screen
-        //TODO loading
+        //TODO edit search  button
     }
 
     private fun initViewModel() {
         viewModel.pokemonKanto.observe(this, Observer { kanto ->
             kanto.pokemonEntries?.let { pokemonEntry -> pokemonAdapter?.listData = pokemonEntry }
-        })
-        viewModel.pokemon.observe(this, Observer { pokemon ->
-            pokemonAdapter?.listData?.find { it.entryNumber == pokemon.id }?.frontDefault = pokemon.sprites?.frontDefault
+            hideLoading()
         })
     }
 
@@ -44,16 +46,26 @@ class MainActivity : AppCompatActivity() {
             intent.putExtras(bundle)
             startActivity(intent)
         }
-        btn_search.setOnClickListener {
+        tv_search.addTextChangedListener {
             val textSearch = tv_search.text.toString()
-            val number = viewModel.pokemonKanto.value?.pokemonEntries?.find { it.pokemonSpecies?.name == textSearch || it.entryNumber.toString() == textSearch }?.entryNumber?.toInt()
-            if(number!=null){
-                pokemonAdapter?.focusPosition(number-1)
-                listRecycler.scrollToPosition(number-1)
+            if (it.toString() == "") {
+                viewModel.pokemonKanto.value?.pokemonEntries?.let { pokemonEntry -> pokemonAdapter?.listData = pokemonEntry }
             } else {
-                Toast.makeText(this,"Pokemon not found",Toast.LENGTH_SHORT)
+                viewModel.pokemonKanto.value?.pokemonEntries?.filter { it.pokemonSpecies?.name?.contains(textSearch) ?: false || it.entryNumber.toString().contains(textSearch)  }?.apply {
+                    pokemonAdapter?.listData = this
+                }
             }
         }
+//        btn_search.setOnClickListener {
+//            val textSearch = tv_search.text.toString()
+//            val number = viewModel.pokemonKanto.value?.pokemonEntries?.find { it.pokemonSpecies?.name == textSearch || it.entryNumber.toString() == textSearch }?.entryNumber?.toInt()
+//            if(number!=null){
+//                pokemonAdapter?.focusPosition(number-1)
+//                listRecycler.scrollToPosition(number-1)
+//            } else {
+//                Toast.makeText(this,"Pokemon not found",Toast.LENGTH_SHORT)
+//            }
+//        }
     }
 
     private fun initViewData() {
@@ -67,5 +79,13 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         pokemonAdapter?.notifyDataSetChanged()
+    }
+
+    fun showLoading() {
+        frlProgressBar?.visibility = View.VISIBLE
+    }
+
+    fun hideLoading() {
+        frlProgressBar?.visibility = View.GONE
     }
 }

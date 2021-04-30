@@ -23,7 +23,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             .subscribe({
                 pokemonKanto.value = it
             }, {
-                Log.i("MAIN", it.message.toString())
+                Log.i("error", it.message.toString())
             })
     }
 
@@ -34,7 +34,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             .subscribe({
                 pokemon.value = it
             }, {
-                Log.i("MAIN", it.message.toString())
+                Log.i("error", it.message.toString())
             })
     }
 }

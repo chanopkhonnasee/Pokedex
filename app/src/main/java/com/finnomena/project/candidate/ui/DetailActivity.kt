@@ -30,6 +30,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        showLoading()
         initViewData()
         initEvent()
     }
@@ -58,6 +59,7 @@ class DetailActivity : AppCompatActivity() {
                     "speed" -> { tvspeed.text = it.baseStat.toString() }
                 }
             }
+            hideLoading()
         })
     }
 
@@ -82,5 +84,13 @@ class DetailActivity : AppCompatActivity() {
                 .into(view)
             SharedPrefsUtil.setString(this,name,url)
         }
+    }
+
+    fun showLoading() {
+        frlProgressBar?.visibility = View.VISIBLE
+    }
+
+    fun hideLoading() {
+        frlProgressBar?.visibility = View.GONE
     }
 }
