@@ -17,14 +17,13 @@
         app:layout_constraintTop_toTopOf="parent">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_search"
-            android:text="@string/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_16"
             android:textColor="@color/colorDarkGray"
             android:textSize="@dimen/text_middle"
             android:layout_margin="@dimen/margin_8"
-            android:background="@drawable/circle_aqua"
+            android:background="@drawable/ic_blue_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
