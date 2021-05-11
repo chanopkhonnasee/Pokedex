@@ -6,6 +6,8 @@ import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
+import retrofit2.CallAdapter
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,7 +15,9 @@ import java.util.concurrent.TimeUnit
 
 val apiModule = module {
     single { provideOkHttpClient(androidContext()) }
-    single { provideApiService(get()) }
+    single<CallAdapter.Factory> { RxJava3CallAdapterFactory.create() }
+    single<Converter.Factory> { GsonConverterFactory.create() }
+    single { provideApiService(get(),get(),get())}
 }
 
 fun provideOkHttpClient(context: Context): OkHttpClient {
@@ -25,12 +29,12 @@ fun provideOkHttpClient(context: Context): OkHttpClient {
         .build()
 }
 
-fun provideApiService(okHttpClient: OkHttpClient): ApiInterface {
+fun provideApiService(okHttpClient: OkHttpClient, rxJava3CallAdapterFactory : CallAdapter.Factory, gsonConverterFactory : Converter.Factory): ApiInterface {
     return Retrofit.Builder()
         .baseUrl("https://pokeapi.co/")
-        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+        .addCallAdapterFactory(rxJava3CallAdapterFactory)
         .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create(Gson()))
+        .addConverterFactory(gsonConverterFactory)
         .build()
         .create(ApiInterface::class.java)
 

@@ -43,6 +43,7 @@ class DetailActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun initViewModel(entryNumber: Int) {
+        viewModel.getPokemon(entryNumber.toString())
         viewModel.pokemon.observe(this, Observer { pokemon ->
             tvPokemonName.text = pokemon.name
             loadImage(pokemon.sprites?.frontDefault,ivPokemonImg,pokemon.name!!)
@@ -70,7 +71,6 @@ class DetailActivity : AppCompatActivity() {
             val data = Gson().fromJson(json, PokemonEntry::class.java)
             if(data.entryNumber != null) {
                 initViewModel(data.entryNumber!!)
-                viewModel.getPokemon(data.entryNumber.toString())
             } else {
                 onBackPressed()
             }

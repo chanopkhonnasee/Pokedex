@@ -26,11 +26,10 @@ class MainActivity : AppCompatActivity() {
         initViewData()
         initEvent()
         initViewModel()
-
-        //TODO edit search  button
     }
 
     private fun initViewModel() {
+        viewModel.getPokemonKanto()
         viewModel.pokemonKanto.observe(this, Observer { kanto ->
             kanto.pokemonEntries?.let { pokemonEntry -> pokemonAdapter?.listData = pokemonEntry }
             hideLoading()
@@ -71,13 +70,10 @@ class MainActivity : AppCompatActivity() {
     private fun initViewData() {
         pokemonAdapter = ListAdapter(this)
         listRecycler.adapter = pokemonAdapter
-
-        viewModel.getPokemonKanto()
     }
 
     override fun onResume() {
         super.onResume()
-
         pokemonAdapter?.notifyDataSetChanged()
     }
 
